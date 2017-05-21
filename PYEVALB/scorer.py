@@ -158,7 +158,7 @@ class Scorer:
             a list of instances of Result
         """
         results = []
-        for ID, (gold, test) in enumerate(zip(f_gold, f_test)):
+        for ID, (gold, test) in enumerate(list(zip(f_gold, f_test))):
             try:
                 gold_tree = parser.create_from_bracket_string(gold)
                 test_tree = parser.create_from_bracket_string(test)
@@ -166,9 +166,9 @@ class Scorer:
             except (WordsUnmatch, LengthUnmatch) as e:
                 current_result = Result()
                 current_result.state = 2
-                print(e.details())
+                print((e.details()))
             except ParsingError as e:
-                print(e.errormessage)
+                print((e.errormessage))
             finally:
                 current_result.ID = ID
                 results.append(current_result)
